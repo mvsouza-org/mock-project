@@ -1,0 +1,11 @@
+language: minimal
+
+jobs:
+  include:
+    - stage: "Building app"
+      if: branch !~ /(create-pr-action|main|staging|development)/ AND tag IS blank
+      script: echo Build
+
+    - stage: "Deploy to Heroku"
+      if: branch IN (development, staging, main) AND tag IS blank
+      script: echo Deployed
